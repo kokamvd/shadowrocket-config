@@ -1,0 +1,23 @@
+---
+alwaysApply: true
+---
+# Shadowrocket Config – Project Structure
+
+- The main editable config is [`sr_ru_mini.conf`](mdc:conf/sr_ru_mini.conf).
+- It optionally includes additional rules from [`sr_dolphin.conf`](mdc:conf/sr_dolphin.conf) via `include = sr_dolphin.conf` inside the `[General]` section.
+- Documentation lives in [`README.md`](mdc:README.md).
+
+## Sections you will see
+
+- `[General]`: global runtime and DNS behavior, update URL, includes.
+- `[Rule]`: routing rules. Keep the final catch-all as the last line (e.g., `FINAL,DIRECT`).
+
+## Where to add things
+
+- Add or change runtime and DNS knobs in `[General]` of [`sr_ru_mini.conf`](mdc:conf/sr_ru_mini.conf).
+- Add new site/app routing in `[Rule]` of [`sr_ru_mini.conf`](mdc:conf/sr_ru_mini.conf). Place broad rules after specific ones.
+- Put organization-specific or rarely changing domain rules in [`sr_dolphin.conf`](mdc:conf/sr_dolphin.conf) and keep it included from the main file.
+
+## Update behavior
+
+- The config can self-update using `update-url` set in `[General]` of [`sr_ru_mini.conf`](mdc:conf/sr_ru_mini.conf). When changing branches or hosting, update this URL accordingly.

@@ -1,0 +1,21 @@
+---
+globs: conf/*.conf
+description: Editing guidance for Shadowrocket .conf files in conf/
+---
+# Editing Shadowrocket `.conf` files
+
+- Prefer changes in [`sr_ru_mini.conf`](mdc:conf/sr_ru_mini.conf); keep [`sr_dolphin.conf`](mdc:conf/sr_dolphin.conf) for supplemental domain rules.
+- Maintain section ordering: `[General]` first, then `[Rule]` blocks.
+- Keep the most specific rules before broader ones. The final rule should remain last, e.g. `FINAL,DIRECT`.
+- Preserve existing indentation and spacing; do not reformat unrelated lines.
+- When adding domains, favor these forms in order of specificity: `DOMAIN`, `DOMAIN-SUFFIX`, `DOMAIN-KEYWORD`.
+- For grouped remote lists, use `RULE-SET,<url>,<POLICY>` and document source URLs inline if needed.
+- When updating the `include` line, reference files relative to `conf/` and ensure the included file exists.
+- For DNS and connectivity settings, modify only keys under `[General]` and avoid duplicating keys.
+
+## Safety checks before saving
+
+- Ensure there is exactly one `update-url` in `[General]` and it points to the intended branch.
+- Verify no trailing commas or extra spaces after policy names (`PROXY`, `DIRECT`, `REJECT`).
+- Confirm `FINAL,...` rule exists and is last; common defaults here are `DIRECT` or a proxy group.
+- If you disable IPv6 (`ipv6 = false`), keep `prefer-ipv6 = false` unless explicitly required otherwise.
